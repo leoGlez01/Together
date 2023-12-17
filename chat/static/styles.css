@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+  }
+
+h1{
+  font-family: 'Plus Jakarta Display','Inter',sans-serif;
+}
+  
+  header {
+    background-color: rgb(37, 36, 32);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    width: 600px;
+    height: 350px;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    box-shadow: 10px 16px rgba(0, 0, 0, 0.5);
+  }
+
+  .login-container h1{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  form p{
+    display: flex;
+    flex-direction: column;
+    min-height: 70px;
+  }
+
+  form input{
+    min-width: 240px;
+    outline: none;
+    border: none;
+    min-height: 25px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.4);
+    color: aliceblue;
+  }
+
+  form button{
+    width: 30%;
+    background-color: orangered;
+    min-height: 30px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+  }
+
+  /*Estilos para la sala del Chat*/
+
+  #headerchat{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .navbar li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid #eba207 ;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    text-align: center;
+    background-color: black;
+    color: #fff;
+    font-size: 12px;
+  }
+
+  .messages{
+    width: 80%;
+    height: 70%;
+    background-color: gray;
+    margin: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .enviar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 20%;
+  }
+
+  #mensaje{
+    max-height: 34px;
+    width: 70%;
+    font-family: 'Inter',sans-serif;
+  }
+
+  #mensaje:is(:focus){
+    outline-color: #eba207;
+  }
+
+  #enviar{
+    max-height: 40px;
+    width: 100px;
+    margin-left: 10px;
+    font-family: 'Plus Jakarta Display',sans-serif;
+    background-color: #fff;
+    color: black;
+  }
+  
+  #enviar:hover{
+    cursor: pointer;
+    background-color: #eba207;
+    color: #fff;
+  }

@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles.css'%}">
+    <title>Together</title>
+</head>
+<body>
+    <header id="headerchat">
+        <center><h1>Hello , Welcome to my chat site ! {{request.user}}</h1></center>
+        <br>
+        {% if request.user.is_authenticated %}
+        <center> Logout the chat Page <a href = "{% url 'logout-user' %}">Logout</a></center>
+        {% endif %}
+        <nav class="navbar">
+            <ul>
+                <li>Leandro</li>
+                {% for user in users %}
+                <li>{{user.username}}</li>
+                {% endfor %}
+            </ul>
+        </nav>         
+        <div id="messages">
+        </div>
+        <div class="enviar">
+            <input id="mensaje" type="text">
+            <button type="submit" id="send">Send</button>
+        </div>
+        <script>
+            const chatSocket = new WebSocket("ws://" + window.location.host + "/");
+        chatSocket.onopen = function (e) {
+                console.log("The connection was setup successfully !");
+            };
+            chatSocket.onclose = function (e) {
+                console.log("Something unexpected happened !");
+            };
+            document.querySelector("#mensaje").focus();
+            document.querySelector("#mensaje").onkeyup = function (e) {
+                if (e.keyCode == 13) {
+                    document.querySelector("#send").click();
+                }
+            };
+            document.querySelector("#send").onclick = function (e) {
+                var messageInput = document.querySelector(
+                "#mensaje"
+                ).value;
+                chatSocket.send(JSON.stringify({ message: messageInput, username : "{{request.user.username}}"}));
+            };
+            chatSocket.onmessage = function (e) {
+                const data = JSON.parse(e.data);
+                var div = document.createElement("div");
+                div.innerHTML = data.username + " : " + data.message;
+                document.querySelector("#mensaje").value = "";
+                document.querySelector("#messages").appendChild(div);
+            };
+            </script>        
+        </header>
+    </body>
+</html>
