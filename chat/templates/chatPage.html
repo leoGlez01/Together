@@ -9,20 +9,26 @@
 </head>
 <body>
     <header id="headerchat">
-        <center><h1>Hello , Welcome to my chat site ! {{request.user}}</h1></center>
-        <br>
-        {% if request.user.is_authenticated %}
-        <center> Logout the chat Page <a href = "{% url 'logout-user' %}">Logout</a></center>
-        {% endif %}
-        <nav class="navbar">
-            <ul>
-                <li>Leandro</li>
+        <div class="top">
+            <nav class="navbar">
+            <h1 style="color: rgb(255, 255, 255);">Together</h1>
+            {% if request.user.is_authenticated %}
+            <a href = "{% url 'logout-user' %}"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z"/>
+                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"/>
+                <path d="M7 12h14l-3 -3m0 6l3 -3"/>
+            </svg></a>
+            {% endif %}
+        </nav>
+        <div class="users">
+            <ul class="user-list">
                 {% for user in users %}
-                <li>{{user.username}}</li>
+                    <li>{{ user.username }}</li>
                 {% endfor %}
             </ul>
-        </nav>         
-        <div id="messages">
+            </div>
+        </div>
+        <div class="caja" id="caja">
         </div>
         <div class="enviar">
             <input id="mensaje" type="text">
@@ -48,12 +54,32 @@
                 ).value;
                 chatSocket.send(JSON.stringify({ message: messageInput, username : "{{request.user.username}}"}));
             };
+            
+            function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+            }
+            var usernameColors = {};
+
             chatSocket.onmessage = function (e) {
-                const data = JSON.parse(e.data);
-                var div = document.createElement("div");
-                div.innerHTML = data.username + " : " + data.message;
-                document.querySelector("#mensaje").value = "";
-                document.querySelector("#messages").appendChild(div);
+            const data = JSON.parse(e.data);
+            if (!usernameColors[data.username]) {
+                usernameColors[data.username] = getRandomColor();
+            }
+            var div = document.createElement("div");
+            var usernameSpan = document.createElement("span");
+            usernameSpan.style.color = usernameColors[data.username];
+            usernameSpan.textContent = data.username;
+            div.appendChild(usernameSpan);
+            div.appendChild(document.createTextNode(": "+data.message));
+            document.querySelector("#mensaje").value = "";
+            document.querySelector("#caja").appendChild(div);
+            let contenedor = document.getElementById('caja');
+            contenedor.scrollTop = contenedor.scrollHeight;
             };
             </script>        
         </header>
