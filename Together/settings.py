@@ -89,6 +89,7 @@ LOGOUT_REDIRECT_URL = "login"
 
 import dj_database_url
 
+
 DATABASES = {
     'default': dj_database_url.parse('postgres://together_rbmi_user:39CPWqc5EGoXZgtaVTtXcWB4cASU2LAu@dpg-cm7km8ed3nmc73cgqvjg-a.ohio-postgres.render.com/together_rbmi')
 }
