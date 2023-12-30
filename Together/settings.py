@@ -72,8 +72,6 @@ CHANNEL_LAYERS = {
     }
 }
 
-LOGIN_REDIRECT_URL = "chat_home"
-
 LOGOUT_REDIRECT_URL = "login"
 
 
