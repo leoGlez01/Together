@@ -11,14 +11,10 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('chat_home')
+                context ={}
+                return render(request, 'chatPage.html', context)
 
 
     else:
         form = FormLogin()
     return render(request, 'login.html', {'form': form})
-
-
-def home(request):
-    context = {}
-    return render(request, 'chatPage.html', context=context)

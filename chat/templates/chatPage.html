@@ -13,27 +13,27 @@
             <nav class="navbar">
             <h1 style="color: rgb(255, 255, 255);">Together</h1>
             {% if request.user.is_authenticated %}
-            <a href = "{% url 'logout-user' %}"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z"/>
-                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"/>
-                <path d="M7 12h14l-3 -3m0 6l3 -3"/>
-            </svg></a>
+                <a href = "{% url 'logout-user' %}"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z"/>
+                    <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"/>
+                    <path d="M7 12h14l-3 -3m0 6l3 -3"/>
+                </svg></a>
+                </nav>
+                <div class="users">
+                    <ul class="user-list">
+                        {% for user in users %}
+                            <li>{{ user.username }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                </div>
+                <div class="caja" id="caja">
+                </div>
+                <div class="enviar">
+                    <input id="mensaje" type="text">
+                    <button type="submit" id="send">Send</button>
+                </div>
             {% endif %}
-        </nav>
-        <div class="users">
-            <ul class="user-list">
-                {% for user in users %}
-                    <li>{{ user.username }}</li>
-                {% endfor %}
-            </ul>
-            </div>
-        </div>
-        <div class="caja" id="caja">
-        </div>
-        <div class="enviar">
-            <input id="mensaje" type="text">
-            <button type="submit" id="send">Send</button>
-        </div>
         <script>
             const chatSocket = new WebSocket("ws://" + window.location.host + "/");
         chatSocket.onopen = function (e) {
