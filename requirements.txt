@@ -74,6 +74,7 @@ six==1.16.0
 sqlparse==0.4.4
 toml==0.10.2
 twine==4.0.2
+Twisted==23.10.0
 txaio==23.1.1
 typing_extensions==4.9.0
 tzdata==2023.3
@@ -83,4 +84,3 @@ wheel==0.42.0
 whitenoise==6.6.0
 zipp==3.17.0
 zope.interface==6.1
-Twisted==23.10.0
