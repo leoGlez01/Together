@@ -30,7 +30,7 @@
                 </div>
             {% endif %}
         <script>
-            const chatSocket = new WebSocket("wss://" + window.location.hostname + ":" + window.location.port + "/");
+            const chatSocket = new WebSocket("wss://" + window.location.hostname + ":8000/");
             chatSocket.onopen = function (e) {
                 console.log("La conexión se estableció correctamente !");
                 
