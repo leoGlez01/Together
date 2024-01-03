@@ -30,24 +30,23 @@
                 </div>
             {% endif %}
         <script>
-            const chatSocket = new WebSocket("wss://" + window.location.host + "/");
-        chatSocket.onopen = function (e) {
-                console.log("The connection was setup successfully !");
+            const chatSocket = new WebSocket("ws://" + window.location.host + "/");
+            chatSocket.onopen = function (e) {
+                console.log("La conexión se estableció correctamente !");
+                
+                document.querySelector("#mensaje").focus();
+                document.querySelector("#mensaje").onkeyup = function (e) {
+                    if (e.keyCode == 13) {
+                        document.querySelector("#send").click();
+                    }
+                };
+                document.querySelector("#send").onclick = function (e) {
+                    var messageInput = document.querySelector("#mensaje").value;
+                    chatSocket.send(JSON.stringify({ message: messageInput, username : "{{request.user.username}}" }));
+                };
             };
             chatSocket.onclose = function (e) {
-                console.log("Something unexpected happened !");
-            };
-            document.querySelector("#mensaje").focus();
-            document.querySelector("#mensaje").onkeyup = function (e) {
-                if (e.keyCode == 13) {
-                    document.querySelector("#send").click();
-                }
-            };
-            document.querySelector("#send").onclick = function (e) {
-                var messageInput = document.querySelector(
-                "#mensaje"
-                ).value;
-                chatSocket.send(JSON.stringify({ message: messageInput, username : "{{request.user.username}}"}));
+                console.log("¡Algo inesperado sucedió !");
             };
             
             function getRandomColor() {
