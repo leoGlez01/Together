@@ -141,8 +141,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ALLOW_ORIGINS = [
-    "https://together-v66h.onrender.com",
-]
+CSRF_TRUSTED_ORIGINS = ['https://together-v66h.onrender.com']
 
-CORS_ALLOW_ALL_ORIGINS = True
+ALLOWED_HOSTS = ['together-v66h.onrender.com']
+
+CORS_ORIGIN_WHITELIST = ['https://together-v66h.onrender.com']
